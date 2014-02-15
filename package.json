@@ -1,0 +1,33 @@
+{
+  "name": "PiPresenceServer",
+  "version": "0.0.1",
+  "description": "Simple NodeJS server and SQLite3 logger for Bluetooth LE presence on the Raspberry Pi.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aevoid/PiPresenceServer.git"
+  },
+  "keywords": [
+    "Raspberry",
+    "Pi",
+    "Bluetooth LE",
+    "Presence Detection",
+    "Server"
+  ],
+  "author": "Aevoid",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/aevoid/PiPresenceServer/issues"
+  },
+  "homepage": "https://github.com/aevoid/PiPresenceServer",
+  "dependencies": {
+    "sqlite3": "2.1.15",
+    "node-static": "~0.7.3",
+    "debug": "~0.7.2",
+    "bleno": "0.0.1"
+  }
+}
