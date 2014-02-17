@@ -22,14 +22,14 @@
                };
             var i = 0;
             // Iterate JSON data series and add to plot
-            while (data.temperature_record[0][i])
+            while (data.presence_record[0][i])
             {
-               series.data.push([data.temperature_record[0][i].unix_time, data.temperature_record[0][i].present]);
+               series.data.push([data.presence_record[0][i].unix_time, data.presence_record[0][i].present]);
                i++;
             }
          
          // add current timestamp with last presence value from db
-         series.data.push([Date.now(), data.temperature_record[0][i-1].present]);
+         series.data.push([Date.now(), data.presence_record[0][i-1].present]);
             
          chart.addSeries(series);
          });
