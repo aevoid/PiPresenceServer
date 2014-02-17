@@ -12,7 +12,6 @@ Files
 * server.js - NodeJS server, returns presence timestamps as JSON, logs to database and serves other static files
 * presence_log.htm - client front-end showing time-series from database records
 * build_database.sh - shell script to create database schema
-* sample_database.db - example database with real world data from the Pi recorded in UK Jan-Feb 2013
 
 Requirements
 ------------
