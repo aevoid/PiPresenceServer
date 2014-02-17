@@ -39,4 +39,7 @@ http://mfg.fhstp.ac.at/development/bluetooth-le-presence-detection-mit-ios-und-r
 
 Screenshots/Images
 ------------------
-
+A screenshot of the console output of the node script:
+<p><a href="http://mfg.fhstp.ac.at/cms/wp-content/uploads/2014/02/console_PiPresenceServer.png"><img src="http://mfg.fhstp.ac.at/cms/wp-content/uploads/2014/02/console_PiPresenceServer.png" alt="Screenshot Console PiPresenceServer" width="400"></a></p>
+A screenshot of the website of the NodeJS-server:
+<p><a href="http://mfg.fhstp.ac.at/cms/wp-content/uploads/2014/02/log_PiPresenceServer.png"><img src="http://mfg.fhstp.ac.at/cms/wp-content/uploads/2014/02/log_PiPresenceServer.png" alt="Screenshot WebLog PiPresenceServer" width="400"></a></p>
