@@ -14,6 +14,11 @@ Files
 * build_database.sh - shell script to create database schema
 * sample_database.db - example database with real world data from the Pi recorded in UK Jan-Feb 2013
 
+Requirements
+------------
+* Raspberry Pi
+* Bluetooth LE (4.0) USB Adapter
+
 Dependencies
 ------------
 * NodeJS
