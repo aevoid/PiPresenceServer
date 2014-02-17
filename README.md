@@ -1,7 +1,7 @@
 PiPresenceServer
 ================
 
-Simple NodeJS server and SQLite3 logger for Bluetooth LE Presence on the Raspberry Pi.
+Simple NodeJS server and SQLite3 logger for Bluetooth LE Presence on the Raspberry Pi to use together with [iOSBLEPresence](https://github.com/aevoid/iOSBLEPresence).
 
 Description
 -----------
@@ -12,7 +12,11 @@ Files
 * server.js - NodeJS server, returns presence timestamps as JSON, logs to database and serves other static files
 * presence_log.htm - client front-end showing time-series from database records
 * build_database.sh - shell script to create database schema
-* sample_database.db - example database with real world data from the Pi recorded in UK Jan-Feb 2013
+
+Requirements
+------------
+* Raspberry Pi
+* Bluetooth LE (4.0) USB Adapter
 
 Dependencies
 ------------
