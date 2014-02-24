@@ -17,6 +17,7 @@ var http = require('http');
 var sqlite3 = require('sqlite3');
 var util = require('util');
 var bleno = require('bleno');
+var gpio = require('rpi-gpio');
 
 
 global.timeout = 0;
@@ -31,7 +32,6 @@ var staticServer = new nodestatic.Server(".");
 
 // Setup database connection for logging
 var db = new sqlite3.Database('./presence.db');
-
 
 
 
@@ -129,7 +129,7 @@ WriteOnlyCharacteristic.prototype.onWriteRequest = function(data, offset, withou
 
 	// log a "presence detected" when first value written
 	if(!global.present){
-     	console.log('checkPresence, 1');
+     	console.log('DB: checkPresence, 1');
      	global.present = 1;
      	var data = {
             unix_time: Date.now(),
@@ -141,6 +141,11 @@ WriteOnlyCharacteristic.prototype.onWriteRequest = function(data, offset, withou
         data.present=1;
         // write 1
         insertData(data);
+        
+        gpio.write(26, true, function(err) {
+	        if (err) throw err;
+	        console.log('GPIO: Switched on presence-LED');
+	    });
 	 }
 	
 	// clear Timeout
@@ -149,7 +154,7 @@ WriteOnlyCharacteristic.prototype.onWriteRequest = function(data, offset, withou
 	
 	// setup Timeout that logs a "connection lost" when no value written for msecs milliseconds 
 	global.timeout = setTimeout(function(){
-		console.log('checkPresence, 0');
+		console.log('DB: checkPresence, 0');
 	 	global.present = 0;
 	 	var data = {
             unix_time: Date.now(),
@@ -161,6 +166,11 @@ WriteOnlyCharacteristic.prototype.onWriteRequest = function(data, offset, withou
         data.present=0;
         // write 0
         insertData(data);
+        
+        gpio.write(26, false, function(err) {
+	        if (err) throw err;
+	        console.log('GPIO: Switched off presence-LED');
+	    });
 	}, msecs);
 
 	callback(this.RESULT_SUCCESS);
@@ -182,7 +192,7 @@ util.inherits(SampleService, bleno.PrimaryService);
 
 // Set up Bluetooth LE peripheral
 bleno.on('stateChange', function(state) {
-	console.log('on -> stateChange: ' + state);
+	console.log('BLENO: on -> stateChange: ' + state);
 	var primaryService = new SampleService();
 	//bleno.setServices([primaryService]);
 	
@@ -196,7 +206,7 @@ bleno.on('stateChange', function(state) {
 bleno.on('advertisingStart', function(error) {
 	var start = new Date();
 	console.log(start.toLocaleString());
-	console.log('on -> advertisingStart ' + (error ? 'error ' + error : 'success'));
+	console.log('BLENO: on -> advertisingStart ' + (error ? 'error ' + error : 'success'));
 	
 	if (!error) {
 		bleno.setServices([
@@ -206,11 +216,11 @@ bleno.on('advertisingStart', function(error) {
 });
 
 bleno.on('advertisingStop', function() {
-	console.log('on -> advertisingStop');
+	console.log('BLENO: on -> advertisingStop');
 });
 
 bleno.on('servicesSet', function(error) {
-	console.log('on -> servicesSet ' + (error ? 'error ' + error : 'success'));
+	console.log('BLENO: on -> servicesSet ' + (error ? 'error ' + error : 'success'));
 });
 
 
@@ -307,14 +317,44 @@ var data = {
 	};
 // write 0
 insertData(data);
-console.log('Initial value written');
+console.log('DB: Initial value written');
 
 process.env.TZ = 'Europe/Amsterdam';
 //console.log(Date.now());
 
+
+gpio.on('export', function(channel) {
+    console.log('GPIO: Channel set: ' + channel);
+});
+
+// Setup output pin for initLED
+gpio.setup(24, gpio.DIR_OUT, initLED);
+gpio.setup(26, gpio.DIR_OUT);
+
+function initLED(){
+	gpio.write(24, true, function(err) {
+        if (err) throw err;
+        console.log('GPIO: Switched on init-LED');
+    });
+}
+   
+
 process.on( 'SIGINT', function() {
   console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" );
   // some other closing procedures go here
+  
+  gpio.write(24, false, function(err) {
+        if (err) throw err;
+        console.log('GPIO: Switched off init-LED');
+    });
+  gpio.write(26, false, function(err) {
+        if (err) throw err;
+        console.log('GPIO: Switched off presence-LED');
+    });  
+  gpio.destroy(function() {
+        console.log('GPIO: All pins unexported');
+    });
+    
   if (global.present){
   	var data = {
 		unix_time: Date.now(),
@@ -323,7 +363,7 @@ process.on( 'SIGINT', function() {
 	insertData(data);
 	data.unix_time++;
 	data.present=0;
-	insertData(data);
+	insertData(data);    
 	// timeout to allow saving of data
 	setTimeout(process.exit,200);
   }
