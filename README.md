@@ -25,6 +25,7 @@ Dependencies
 * node-sqlite3
 * node-static
 * node-bleno
+* rpi-gpio
 
 Install/Setup
 -------------
