@@ -17,6 +17,7 @@ Requirements
 ------------
 * Raspberry Pi
 * Bluetooth LE (4.0) USB Adapter
+* Optional: LED-circuit
 
 Dependencies
 ------------
