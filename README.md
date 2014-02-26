@@ -45,7 +45,8 @@ A screenshot of the console output of the node script:
 <p><a href="http://mfg.fhstp.ac.at/cms/wp-content/uploads/2014/02/console_PiPresenceServer.png"><img src="http://mfg.fhstp.ac.at/cms/wp-content/uploads/2014/02/console_PiPresenceServer.png" alt="Screenshot Console PiPresenceServer" width="400"></a></p>
 A screenshot of the website of the NodeJS-server:
 <p><a href="http://mfg.fhstp.ac.at/cms/wp-content/uploads/2014/02/log_PiPresenceServer.png"><img src="http://mfg.fhstp.ac.at/cms/wp-content/uploads/2014/02/log_PiPresenceServer.png" alt="Screenshot WebLog PiPresenceServer" width="400"></a></p>
-<a name="led-circuit">Schematic for the LED circuit:</a>
+<a name="led-circuit"></a>
+Schematic for the LED circuit:
 <p><a href="http://mfg.fhstp.ac.at/cms/wp-content/uploads/2014/02/schematic.png"><img src="http://mfg.fhstp.ac.at/cms/wp-content/uploads/2014/02/schematic.png" alt="Schematic LED circuit" width="400"></a></p>
 Picture of Raspberry Pi with LED circuit:
 <p><a href="http://mfg.fhstp.ac.at/cms/wp-content/uploads/2014/02/Foto-26.02.14-08-48-10.jpg"><img src="http://mfg.fhstp.ac.at/cms/wp-content/uploads/2014/02/Foto-26.02.14-08-48-10.jpg" alt="Picture LED circuit" width="400"></a></p>
